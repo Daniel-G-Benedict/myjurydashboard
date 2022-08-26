@@ -2,15 +2,15 @@
 <html lang="en">
     <head>
         <title> NC Map </title>
-        <link rel="styelsheet" href="style.css" type="text/css" />
-    </head>
+        <link rel="stylesheet" type="text/css" href="style.css" />
+      </head>
     <body>
 
         <div id="dashboard" style="display: flex; flex-direction: row; flex-flow: row wrap; align-items: stretch;">
-            <div id ="map" style="background-color: black; height: 600px; flex: 2 0 300px; overflow: hidden;">
+            <div id ="map">
                     <mapOverlay style="position : relative; top : 90%; left : 35px; z-index: 1;">
                         <countyDropdown style="position:relative; left : 32%; bottom : 85%;">
-                            <label style="color:white;">
+                            <label>
                                 Select a county
                             </label>
                             <br/>
@@ -122,35 +122,9 @@
                         <buttonGroup>
                             <button id="zoomOut">
                                 -
-                                <script> document.getElementById("zoomOut").onclick = function() {
-                                    console.log("zooming out");
-                                    var map = document.getElementById("mapOfNC");
-                                    console.log(map.style.transform);
-                                            var m = map.style.transform;
-                                            var mt = m.substring(m.indexOf('(') + 1, m.indexOf(')')).split(',');
-                                            // or else: var mt = m.substring(7, m.length - 1).split(',');
-                                        var nextScale = mt[0]*.9;
-                                        console.log(nextScale);
-                                        map.style.transition = "transform .4s";
-                                        map.style.transform = "scale(" + nextScale.toString() + "," + nextScale.toString() + ")";
-                                };
-                                </script>
                             </button>
                             <button id="zoomIn">
                                 +
-                                <script> document.getElementById("zoomIn").onclick = function() {
-                                        console.log("zooming in")
-                                        var map = document.getElementById("mapOfNC");
-                                        console.log(map.style.transform);
-                                            var m = map.style.transform;
-                                            var mt = m.substring(m.indexOf('(') + 1, m.indexOf(')')).split(',');
-                                            // or else: var mt = m.substring(7, m.length - 1).split(',');
-                                        var nextScale = mt[0]*1.2;
-                                        console.log(nextScale);
-                                        map.style.transition = "transform .4s";
-                                        map.style.transform = "scale(" + nextScale.toString() + "," + nextScale.toString() + ")";
-                                    };
-                                </script>
                             </button>
                         </buttonGroup>
                     </mapOverlay>    
@@ -182,8 +156,7 @@
                       <defs
                          id="defs3891" />
                       <g
-                         id="g3614"
-                         style="fill:#4d2066;stroke:black;stroke-width:40;stroke-linejoin:round">
+                         id="g3614">
                         <use
                            id="use3616"
                            style="fill:#ffffff;stroke: width 10;"
@@ -1106,73 +1079,21 @@
                          width="80608"
                          height="30557"/>
                         </svg>
-                     <script>
-                                    var offset = [0,0];
-                                    var map = document.getElementById("mapOfNC");
-                                    var isDown = false;
-                                    
-                                    map.addEventListener( "mousedown", function(e) {
-                                        console.log("moving map");
-                                        isDown = true;
-                                        offset = [
-                                            parseInt(map.style.left) - e.clientX,
-                                            parseInt(map.style.top) - e.clientY
-                                        ];
-                                    }, true);
-                                    document.addEventListener('mouseup', function() {
-                                        console.log("stopped moving map");
-                                        isDown = false;
-                                    }, true);
-                
-                                    document.addEventListener('mousemove', function(e) {
-                                        console.log("moving");
-                                        event.preventDefault();
-                                        if (isDown) {
-                                            map.style.left = (e.clientX + offset[0]) + 'px';
-                                            map.style.top  = (e.clientY + offset[1]) + 'px';
-                                        }
-                                    }, true);
-
-                                    function changeColor() {
-                                        console.log(e);
-                                    };
-
-                                    var counties = document.querySelectorAll(".county");
-
-                                    counties.forEach( county => {
-                                        county.addEventListener('mouseover', function handleHover(e) {
-                                            console.log("hovered over ", e);
-                                            e.srcElement.style = "fill: #bc75e6;"
-                                        })
-                                        county.addEventListener('mouseout', function handleHover(e) {
-                                            console.log("hovered over ", e);
-                                            e.srcElement.style = "stroke:black;stroke-width:40;stroke-linejoin:round"
-                                        }
-                                    )
-                                    })
-                                    
-
-                    </script>
             </div>
             <div id="data" style=" flex: 2 0 300px; ">
-                    <div id="surveyData" style="background-color:#2f00ff; height: 200px;">
-                        <h2 style="margin: 0; 
-                                    color: white; 
-                                    padding-top:20px; 
-                                    padding-left: 25px"
-                            >{survey data}
+                    <div id="dataViz">
+                        <h2>
+                           Census data
                         </h2>
                     </div>
-                    <div id="juryBreakdown" style="background-color: green; height: 400px;">
-                        <h2 style="margin: 0; 
-                                color: white; 
-                                padding-top:20px; 
-                                padding-left: 25px"
-                            >Jury data
+                    <div id="dataExplanation">
+                        <h2 id="countyName">County name
                         </h2>
+                        <p>{county name} in North Carolina has a total population of {population number} people. Using census data, we would hope to see a jury with a minimum of { number + demographic }, { number + demographic }, { number + demographic }, etc. In a secondary preference, we would like to see a jury with a makeup of { number + demographic }, { number + demographic }, { number + demographic }, etc. </p>
                     </div>
             </div>
         </div> 
 
 </body>
 </html>
+<script src="juryScript.js"></script>
