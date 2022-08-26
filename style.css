@@ -1,0 +1,74 @@
+button {
+  box-shadow: inset 0px 1px 0px 0px #e184f3;
+  background-color: #c123de;
+  border-radius: 6px;
+  border: 1px solid #a511c0;
+  display: inline-block;
+  cursor: pointer;
+  color: #ffffff;
+  font-family: Arial;
+  font-size: 15px;
+  font-weight: bold;
+  padding: 6px 24px;
+  text-decoration: none;
+  text-shadow: 0px 1px 0px #9b14b3;
+}
+button:hover {
+  background-color: #a20dbd;
+}
+button:active {
+  position: relative;
+  top: 1px;
+}
+
+#dataViz {
+    background-color:#white; 
+    height: 380px;
+
+    margin : 0;
+
+    padding-top: 20px;
+    padding-left: 25px;
+    padding-right: 25px;
+
+}
+
+#dataExplanation {
+  background-color: white;
+  height: 200px;
+  margin: 0;
+
+  padding-top: 20px;
+  padding-left: 25px;
+  padding-right: 25px;
+}
+
+h2 {
+    color : #8A14FF;
+    margin: 0;
+}
+
+p {
+    font-size: 14;
+}
+
+#map {
+    background-color: white; 
+    height: 600px; 
+    flex: 2 0 300px; 
+    overflow: hidden;
+}
+
+.county {
+    fill:#4d2066;
+    stroke:white;
+    stroke-width:40;
+    stroke-linejoin:round;
+}
+
+.county:hover {
+    fill:#bc75e6;
+    stroke:white;
+    stroke-width:40;
+    stroke-linejoin:round;
+}
