@@ -10,8 +10,6 @@ var countyDropdown = document.getElementById("countyDropdown");
 
 
 
-
-
 // ZOOM OUT
 document.getElementById("zoomOut").onclick = function () {
   //console.log("zooming out");
@@ -63,7 +61,7 @@ map.addEventListener(
   "mousedown",
   function (e) {
 
-    console.log("moving map");
+    //console.log("moving map");
     isDown = true;
     
     // get the map width and height to check against the "other" variables
@@ -91,7 +89,7 @@ map.addEventListener(
 document.addEventListener(
   "mouseup",
   function () {
-    console.log("stopped moving map");
+    //console.log("stopped moving map");
     isDown = false;
 
     var map = document.getElementById("mapOfNC");
@@ -190,7 +188,8 @@ document.addEventListener(
 countyDropdown.onchange = function() {
   console.log(countyDropdown.value);
   changeMap(countyDropdown.value);
-
+    // change paragraph
+    changeData(countyDropdown.value);
 }
 
 // event for clicking on a county
@@ -200,7 +199,7 @@ counties.forEach((county) => {
 
     //update the dropdown to the selected county
     countyDropdown.value = e.path[0].id;
-    console.log(e.path[0].id);
+    console.log("Clicked " + e.path[0].id + " county");
 
     // change paragraph
     changeData(e.path[0].id);
@@ -208,11 +207,13 @@ counties.forEach((county) => {
     // change the map
     changeMap(e.path[0].id);
 
+    console.log(e.path[0].id);
+
   });
 });
 
 function changeMap(target) {
-  console.log(target)
+  //console.log(target)
   
   var countyToChange = document.getElementById(target);
 
@@ -224,23 +225,24 @@ function changeMap(target) {
   // change the selected county to a lighter shade of purple
   countyToChange.style.fill = "#bc75e6";
 
-  //Get the census info from JSON
-  var countyData = censusData.filter(obj => {
-    return obj.County === target;
-  })
-
 } // close changeMap()
 
 
 
 function changeData(target) {
 
+      console.log("The target is...");
+      console.log(target)
+      console.log(censusData);
+
       //Get the census info from JSON
         var countyData = censusData.filter(obj => {
             return obj.County === target;
         })
 
-        console.log(countyData)
+      console.log("logging county data")
+      
+      console.log(countyData);
 
       // change the paragraph county title
       document.getElementById("countyName").innerText = target;
@@ -248,80 +250,65 @@ function changeData(target) {
       document.getElementById("countyNameParagraph").innerText = target;
       // change the population count in the paragraph
       document.getElementById("countyTotalPopulation").innerText = (countyData[0].Asian.Total + countyData[0].Black.Total + countyData[0].Other.Total + countyData[0].White.Total).toLocaleString("en-US");
-      // change the paragraph to show the minimum number of individuals of Asian decent on the jury
+      // change the paragraph to show the minimum number of individuals of Asian descent on the jury
       if (countyData[0].Asian.Min > 0) {
-        document.getElementById("minAsian").innerText = countyData[0].Asian.Min + " individuals of Asian decent,";
+        document.getElementById("minAsian").innerText = countyData[0].Asian.Min + " individuals of Asian descent,";
       }
-      // change the paragraph to show the minimum number of individuals of Black decent on the jury
+      // change the paragraph to show the minimum number of individuals of Black descent on the jury
       if (countyData[0].Black.Min > 0) {
-        document.getElementById("minBlack").innerText = countyData[0].Black.Min + " individuals of Black decent,";
+        document.getElementById("minBlack").innerText = countyData[0].Black.Min + " individuals of Black descent,";
       }
-      // change the paragraph to show the minimum number of individuals of "other" decent on the jury
+      // change the paragraph to show the minimum number of individuals of "other" descent on the jury
       if (countyData[0].Other.Min > 0) {
-        document.getElementById("minOther").innerText = countyData[0].Other.Min + " individuals of Other decent,";
+        document.getElementById("minOther").innerText = countyData[0].Other.Min + " individuals of Other descent,";
       }
-      // change the paragraph to show the minimum number of individuals of White decent on the jury
+      // change the paragraph to show the minimum number of individuals of White descent on the jury
       if (countyData[0].White.Min > 0) {
-        document.getElementById("minWhite").innerText = countyData[0].White.Min + " individuals of White decent.";
+        document.getElementById("minWhite").innerText = countyData[0].White.Min + " individuals of White descent.";
       }
-      // change the paragraph to show the max number of individuals of Asian decent on the jury
-      document.getElementById("maxAsian").innerText = countyData[0].Asian.Max + " individuals of Asian decent,";
-      // change the paragraph max number of individuals of Black decent on the jury
-      document.getElementById("maxBlack").innerText = countyData[0].Black.Max + " individuals of Black decent,";
-      // change the paragraph max number of individuals of Other decent on the jury
-      document.getElementById("maxOther").innerText = countyData[0].Other.Max + " individuals of Other decent,";
-      // change the paragraph max number of individuals of White decent on the jury
-      document.getElementById("maxWhite").innerText = countyData[0].White.Max + " individuals of White decent.";
-    
-      console.log(countyData.length)
-      console.log(countyData)
+      // change the paragraph to show the max number of individuals of Asian descent on the jury
+      document.getElementById("maxAsian").innerText = countyData[0].Asian.Max + " individuals of Asian descent,";
+      // change the paragraph max number of individuals of Black descent on the jury
+      document.getElementById("maxBlack").innerText = countyData[0].Black.Max + " individuals of Black descent,";
+      // change the paragraph max number of individuals of Other descent on the jury
+      document.getElementById("maxOther").innerText = countyData[0].Other.Max + " individuals of Other descent,";
+      // change the paragraph max number of individuals of White descent on the jury
+      document.getElementById("maxWhite").innerText = countyData[0].White.Max + " individuals of White descent.";
 
 
    
-        document.getElementById(colors[0]).style.height = countyData[0].Asian.Min;
-        //document.getElementById(barNumberone).innerText = countyData[0].Asian.Min;
-        console.log(document.getElementById(barNumberone));
+        document.getElementById(colors[0]).style.height = (countyData[0].Asian.Min.toString() * 8) + "%";        
+        document.getElementById("barNumber" + colors[0] + 'Text').innerText = countyData[0].Asian.Min;
+
         // change the chart data
-        document.getElementById(colors[1]).style.height  = countyData[0].Black.Min;
-        document.getElementById(barNumbertwo).innerText = countyData[0].Black.Min;
+        document.getElementById(colors[1]).style.height  = (countyData[0].Black.Min.toString() * 8) + "%";
+        document.getElementById("barNumber" + colors[1] + 'Text').innerText = countyData[0].Black.Min;
+        
         // change the chart data
-        document.getElementById(colors[2]).style.height = countyData[0].Other.Min;
-        document.getElementById(barNumbertthree).innerText = countyData[0].Other.Min;
+        document.getElementById(colors[2]).style.height = (countyData[0].Other.Min.toString() * 8) + "%";
+        document.getElementById("barNumber" + colors[2] + 'Text').innerText = countyData[0].Other.Min;
+
         // change the chart data
-        document.getElementById(colors[3]).style.height = countyData[0].White.Min;
-        document.getElementById(barNumberfour).innerText = countyData[0].White.Min;
+        document.getElementById(colors[3]).style.height = (countyData[0].White.Min.toString() * 8) + "%";
+        document.getElementById("barNumber" + colors[3] + 'Text').innerText = countyData[0].White.Min;
+
         // change the chart data
-        document.getElementById(colors[4]).style.height = countyData[0].Asian.Max;
-        document.getElementById(barNumberfive).innerText = countyData[0].Asian.Max;
+        document.getElementById(colors[4]).style.height = (countyData[0].Asian.Max.toString() * 8) + "%";
+        document.getElementById("barNumber" + colors[4] + 'Text').innerText = countyData[0].Asian.Max;
+        
         // change the chart data
-        document.getElementById(colors[5]).style.height = countyData[0].Black.Max;
-        document.getElementById(barNumbersix).innerText = countyData[0].Black.Max;
+        document.getElementById(colors[5]).style.height = (countyData[0].Black.Max.toString() * 8) + "%";
+        document.getElementById("barNumber" + colors[5] + 'Text').innerText = countyData[0].Black.Max;
+        
         // change the chart data
-        document.getElementById(colors[6]).style.height = countyData[0].Other.Max;
-        document.getElementById(barNumberseven).innerText = countyData[0].Other.Max;
+        document.getElementById(colors[6]).style.height = (countyData[0].Other.Max.toString() * 8) + "%";
+        document.getElementById("barNumber" + colors[6] + 'Text').innerText = countyData[0].Other.Max;
+        
         // change the chart data
-        document.getElementById(colors[7]).style.height = countyData[0].White.Max;
-        document.getElementById(barNumbereight).innerText = countyData[0].White.Max;
+        document.getElementById(colors[7]).style.height = (countyData[0].White.Max.toString() * 8) + "%";
+        document.getElementById("barNumber" + colors[7] + 'Text').innerText = countyData[0].White.Max;
 
 
-      console.log(chartjson.data[2].title)
-      console.log(chartjson)
-
-
-      //lets add data to the chart
-    for (var i = 0; i < chartjson.data.length; i++) {
-      barrow.setAttribute('class', 'bars');
-      var prefix = chartjson.prefix || '';
-      //create the bar data
-      var bardata = document.createElement(TDATA);
-      var bar = document.createElement('div');
-      bar.setAttribute('class', colors[i]);
-      bar.style.height = chartjson.data[i][chartjson.ykey] + prefix;
-      bardata.innerText = chartjson.data[i][chartjson.ykey] + prefix;
-      
-      bardata.appendChild(bar);
-      barrow.appendChild(bardata);
-    }
     }// close changeData()
 
 
@@ -390,15 +377,25 @@ var barrow = document.createElement(TROW);
 for (var i = 0; i < chartjson.data.length; i++) {
   barrow.setAttribute('class', 'bars');
   var prefix = chartjson.prefix || '';
+  
   //create the bar data
   var bardata = document.createElement(TDATA);
   bardata.setAttribute('id', 'barNumber' + colors[i]);
+  
+  // create the actual bar element
   var bar = document.createElement('div');
   bar.setAttribute('class', colors[i]);
   bar.setAttribute('id',colors[i]);
   bar.style.transition = 'height .3s';
   bar.style.height = chartjson.data[i][chartjson.ykey] + prefix;
-  bardata.innerText = chartjson.data[i][chartjson.ykey] + prefix;
+  bar.style.width = '30px';
+  
+  // create the bar text label
+  var barText = document.createElement('div');
+  barText.setAttribute('id', 'barNumber' + colors[i] + 'Text')
+  barText.innerText = chartjson.data[i][chartjson.ykey];
+
+  bardata.appendChild(barText);
   bardata.appendChild(bar);
   barrow.appendChild(bardata);
 }
@@ -530,3 +527,6 @@ var  censusData = [
   {"County" : "Yadkin" , "Asian" : { "Total" : 38, "Min" : 0,"Max" : 1},  "Black" : { "Total" : 1211,"Min" : 0, "Max" : 1}, "Other" : {"Total" : 1879, "Min" : 0, "Max" : 1}, "White" : {"Total" : 34336, "Min" : 10, "Max" :11}},
   {"County" : "Yancey" , "Asian" : { "Total" : 53, "Min" : 0,"Max" : 1},  "Black" : { "Total" : 114,"Min" : 0, "Max" : 1}, "Other" : {"Total" : 600, "Min" : 0, "Max" : 1}, "White" : {"Total" : 17004, "Min" : 11, "Max" :12}}
 ];
+
+changeData("Alamance");
+changeMap("Alamance");
