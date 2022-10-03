@@ -244,36 +244,28 @@ function changeData(target) {
       
       console.log(countyData);
 
-      // change the paragraph county title
+      // change the paragraph county title 
       document.getElementById("countyName").innerText = target;
       // change the paragraph county word
       document.getElementById("countyNameParagraph").innerText = target;
       // change the population count in the paragraph
       document.getElementById("countyTotalPopulation").innerText = (countyData[0].Asian.Total + countyData[0].Black.Total + countyData[0].Other.Total + countyData[0].White.Total).toLocaleString("en-US");
       // change the paragraph to show the minimum number of individuals of Asian descent on the jury
-      if (countyData[0].Asian.Min > 0) {
-        document.getElementById("minAsian").innerText = countyData[0].Asian.Min + " individuals of Asian descent,";
-      }
+        document.getElementById("minAsian").innerText = countyData[0].Asian.Min;
       // change the paragraph to show the minimum number of individuals of Black descent on the jury
-      if (countyData[0].Black.Min > 0) {
-        document.getElementById("minBlack").innerText = countyData[0].Black.Min + " individuals of Black descent,";
-      }
+        document.getElementById("minBlack").innerText = countyData[0].Black.Min;
       // change the paragraph to show the minimum number of individuals of "other" descent on the jury
-      if (countyData[0].Other.Min > 0) {
-        document.getElementById("minOther").innerText = countyData[0].Other.Min + " individuals of Other descent,";
-      }
+        document.getElementById("minOther").innerText = countyData[0].Other.Min;
       // change the paragraph to show the minimum number of individuals of White descent on the jury
-      if (countyData[0].White.Min > 0) {
-        document.getElementById("minWhite").innerText = countyData[0].White.Min + " individuals of White descent.";
-      }
+        document.getElementById("minWhite").innerText = countyData[0].White.Min;
       // change the paragraph to show the max number of individuals of Asian descent on the jury
-      document.getElementById("maxAsian").innerText = countyData[0].Asian.Max + " individuals of Asian descent,";
+      document.getElementById("maxAsian").innerText = countyData[0].Asian.Max;
       // change the paragraph max number of individuals of Black descent on the jury
-      document.getElementById("maxBlack").innerText = countyData[0].Black.Max + " individuals of Black descent,";
+      document.getElementById("maxBlack").innerText = countyData[0].Black.Max;
       // change the paragraph max number of individuals of Other descent on the jury
-      document.getElementById("maxOther").innerText = countyData[0].Other.Max + " individuals of Other descent,";
+      document.getElementById("maxOther").innerText = countyData[0].Other.Max;
       // change the paragraph max number of individuals of White descent on the jury
-      document.getElementById("maxWhite").innerText = countyData[0].White.Max + " individuals of White descent.";
+      document.getElementById("maxWhite").innerText = countyData[0].White.Max;
 
 
    
