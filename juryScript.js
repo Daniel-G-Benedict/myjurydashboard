@@ -354,7 +354,8 @@ var barchart = document.createElement('table');
 //create the title row
 var titlerow = document.createElement(TROW);
 //create the title data
-var titledata = document.createElement(TDATA);
+var titledata = document.createElement("h2");
+
 //make the colspan to number of records
 titledata.setAttribute('colspan', chartjson.data.length + 1);
 titledata.setAttribute('class', 'charttitle');
