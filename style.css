@@ -29,6 +29,8 @@ button:active {
   padding-top: 20px;
   padding-right: 0px;
   padding-left: 25px;
+
+  height : 300px;
 }
 
 #chart {
@@ -58,7 +60,7 @@ p {
 #map {
     background-color: white; 
     height: 600px; 
-    flex: 2 0 300px; 
+    flex: auto; 
     overflow: hidden;
 }
 

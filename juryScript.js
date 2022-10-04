@@ -56,34 +56,41 @@ else {
 }
 };
 
+
+
 // MAP DRAG - MOUSE DOWN EVENT LISTENER
 map.addEventListener(
   "mousedown",
   function (e) {
-
-    //console.log("moving map");
-    isDown = true;
-    
-    // get the map width and height to check against the "other" variables
-    var map = document.getElementById("mapOfNC");
-    //console.log(map)
-
-    map.style.transition = "left 0s";
-    
-    //console.log(map.style.transform);
-    var m = map.style.transform;
-    var mt = m.substring(m.indexOf("(") + 1, m.indexOf(")")).split(",");
-
-
-    var newMapX = parseInt(map.style.left) - e.clientX;
-    var newMapY = parseInt(map.style.top) - e.clientY;
-
-    offset = [
-      newMapX, newMapY
-    ];
+    beginMapDrag();
   },
   true
-);
+);//close addding map drag mouse down listener
+
+function beginMapDrag() {
+//console.log("moving map");
+isDown = true;
+    
+// get the map width and height to check against the "other" variables
+var map = document.getElementById("mapOfNC");
+//console.log(map)
+
+map.style.transition = "left 0s";
+
+//console.log(map.style.transform);
+var m = map.style.transform;
+var mt = m.substring(m.indexOf("(") + 1, m.indexOf(")")).split(",");
+
+
+var newMapX = parseInt(map.style.left) - e.clientX;
+var newMapY = parseInt(map.style.top) - e.clientY;
+
+offset = [
+  newMapX, newMapY
+];
+}//close beginMapDrag()
+
+
 
 // MAP DRAG - MOUSE UP EVENT LISTENER
 document.addEventListener(
@@ -166,20 +173,6 @@ document.addEventListener(
     var distToLimitTop
 
    // console.log(map)
-  },
-  true
-);
-
-// MAP DRAG - MOUSE MOVE EVENT LISTENER
-document.addEventListener(
-  "mousemove",
-  function (e) {
-    //console.log("moving");
-    event.preventDefault();
-    if (isDown) {
-      map.style.left = e.clientX + offset[0] + "px";
-      map.style.top = e.clientY + offset[1] + "px";
-    }
   },
   true
 );
