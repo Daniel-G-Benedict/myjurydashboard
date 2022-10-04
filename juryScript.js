@@ -197,20 +197,33 @@ counties.forEach((county) => {
 
   county.addEventListener("click", function (e) {
 
-    //update the dropdown to the selected county
-    countyDropdown.value = e.path[0].id;
-    console.log("Clicked " + e.path[0].id + " county");
+//update dashboard
+updateDashboard(e.path[0].id)
 
-    // change paragraph
-    changeData(e.path[0].id);
+  });
 
-    // change the map
-    changeMap(e.path[0].id);
+  county.addEventListener("touchend", function (e) {
 
-    console.log(e.path[0].id);
+//update dashboard
+updateDashboard(e.path[0].id)
 
   });
 });
+
+function updateDashboard(target) {
+      
+      //update the dropdown to the selected county
+      countyDropdown.value = target;
+      console.log("Clicked " + target + " county");
+
+      // change paragraph
+      changeData(target);
+
+      // change the map
+      changeMap(target);
+  
+      console.log(target);
+}
 
 function changeMap(target) {
   //console.log(target)
@@ -245,7 +258,7 @@ function changeData(target) {
       console.log(countyData);
 
       // change the paragraph county title 
-      document.getElementById("countyName").innerText = target;
+      document.getElementById("countyName").innerText = target + " County";
       // change the paragraph county word
       document.getElementById("countyNameParagraph").innerText = target;
       // change the population count in the paragraph
