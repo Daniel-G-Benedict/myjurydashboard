@@ -263,38 +263,39 @@ function changeData(target) {
       // change the paragraph max number of individuals of Black descent on the jury
       document.getElementById("maxBlack").innerText = countyData[0].Black.Max;
       // change the paragraph max number of individuals of Other descent on the jury
-      document.getElementById("maxOther").innerText = countyData[0].Other.Max;
+      document.getElementById("maxOther").innerText = countyData[0].White.Min;
       // change the paragraph max number of individuals of White descent on the jury
       document.getElementById("maxWhite").innerText = countyData[0].White.Max;
 
 
-   
+        // change the chart data
         document.getElementById(colors[0]).style.height = (countyData[0].Asian.Min.toString() * 8) + "%";        
         document.getElementById("barNumber" + colors[0] + 'Text').innerText = countyData[0].Asian.Min;
 
-        // change the chart data
-        document.getElementById(colors[1]).style.height  = (countyData[0].Black.Min.toString() * 8) + "%";
-        document.getElementById("barNumber" + colors[1] + 'Text').innerText = countyData[0].Black.Min;
         
         // change the chart data
-        document.getElementById(colors[2]).style.height = (countyData[0].Other.Min.toString() * 8) + "%";
-        document.getElementById("barNumber" + colors[2] + 'Text').innerText = countyData[0].Other.Min;
+        document.getElementById(colors[1]).style.height  = (countyData[0].Asian.Max.toString() * 8) + "%";
+        document.getElementById("barNumber" + colors[1] + 'Text').innerText = countyData[0].Asian.Max;
+        
+        // change the chart data
+        document.getElementById(colors[2]).style.height = (countyData[0].Black.Min.toString() * 8) + "%";
+        document.getElementById("barNumber" + colors[2] + 'Text').innerText = countyData[0].Black.Min;
 
         // change the chart data
-        document.getElementById(colors[3]).style.height = (countyData[0].White.Min.toString() * 8) + "%";
-        document.getElementById("barNumber" + colors[3] + 'Text').innerText = countyData[0].White.Min;
+        document.getElementById(colors[3]).style.height = (countyData[0].Black.Max.toString() * 8) + "%";
+        document.getElementById("barNumber" + colors[3] + 'Text').innerText = countyData[0].Black.Max;
 
         // change the chart data
-        document.getElementById(colors[4]).style.height = (countyData[0].Asian.Max.toString() * 8) + "%";
-        document.getElementById("barNumber" + colors[4] + 'Text').innerText = countyData[0].Asian.Max;
+        document.getElementById(colors[4]).style.height = (countyData[0].Other.Min.toString() * 8) + "%";
+        document.getElementById("barNumber" + colors[4] + 'Text').innerText = countyData[0].Other.Min;
         
         // change the chart data
-        document.getElementById(colors[5]).style.height = (countyData[0].Black.Max.toString() * 8) + "%";
-        document.getElementById("barNumber" + colors[5] + 'Text').innerText = countyData[0].Black.Max;
+        document.getElementById(colors[5]).style.height = (countyData[0].Other.Max.toString() * 8) + "%";
+        document.getElementById("barNumber" + colors[5] + 'Text').innerText = countyData[0].Other.Max;
         
         // change the chart data
-        document.getElementById(colors[6]).style.height = (countyData[0].Other.Max.toString() * 8) + "%";
-        document.getElementById("barNumber" + colors[6] + 'Text').innerText = countyData[0].Other.Max;
+        document.getElementById(colors[6]).style.height = (countyData[0].White.Min.toString() * 8) + "%";
+        document.getElementById("barNumber" + colors[6] + 'Text').innerText = countyData[0].White.Min;
         
         // change the chart data
         document.getElementById(colors[7]).style.height = (countyData[0].White.Max.toString() * 8) + "%";
