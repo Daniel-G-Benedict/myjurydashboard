@@ -2,12 +2,11 @@
 // "global" variables
 
 var offset = [0, 0];
-var isDown = false;
+var mapDrag = false;
 
 var map = document.getElementById("mapOfNC");
 var counties = document.querySelectorAll(".county");
 var countyDropdown = document.getElementById("countyDropdown");
-
 
 
 // ZOOM OUT
@@ -63,26 +62,22 @@ map.addEventListener(
   "mousedown",
   function (e) {
 
-    //console.log("moving map");
-    isDown = true;
+    console.log("moving map");
     
     // get the map width and height to check against the "other" variables
     var map = document.getElementById("mapOfNC");
-    //console.log(map)
+    console.log("map clicked")
 
     map.style.transition = "left 0s";
-    
-    //console.log(map.style.transform);
-    var m = map.style.transform;
-    var mt = m.substring(m.indexOf("(") + 1, m.indexOf(")")).split(",");
-
 
     var newMapX = parseInt(map.style.left) - e.clientX;
+    console.log(map.getAttribute('style').left);
     var newMapY = parseInt(map.style.top) - e.clientY;
 
     offset = [
       newMapX, newMapY
     ];
+    mapDrag = true;
   },
   true
 );
@@ -92,7 +87,7 @@ map.addEventListener(
 document.addEventListener(
   "mouseup",
   function () {
-    //console.log("stopped moving map");
+    console.log("stopped moving map");
     isDown = false;
 
     var map = document.getElementById("mapOfNC");
@@ -169,6 +164,8 @@ document.addEventListener(
     var distToLimitTop
 
    // console.log(map)
+
+   mapDrag = false;
   },
   true
 );
@@ -177,12 +174,23 @@ document.addEventListener(
 document.addEventListener(
   "mousemove",
   function (e) {
-    //console.log("moving");
-    event.preventDefault();
-    if (isDown) {
-      map.style.left = e.clientX + offset[0] + "px";
-      map.style.top = e.clientY + offset[1] + "px";
-    }
+    if (mapDrag == true) {
+    console.log("moving");
+    e.preventDefault();
+
+      console.log("The offset of the X value = " + offset[0])
+
+      var leftValue = e.clientX + offset[0];
+      var topValue = e.clientY + offset[1];
+
+      console.log("the client x value = " + e.clientX)
+
+      //map.setAttribute('style', 'left : ' + leftValue.toString() + "px");
+      //map.setAttribute('style', 'top : '+ topValue.toString() + "px");
+      
+      map.style.left = leftValue.toString() + "px";
+      map.style.top  = topValue.toString() + "px";
+  }
   },
   true
 );
@@ -200,15 +208,32 @@ counties.forEach((county) => {
 
   county.addEventListener("click", function (e) {
 
-//update dashboard
-updateDashboard(e.path[0].id)
+    // browser compatibility
+    if (e.path) {
+      console.log("Supports `path`");
+      updateDashboard(e.path[0].id);
+    }
+    // browser compatibility
+      if (e.composedPath) {
+        console.log("Supports `composedPath`");
+        updateDashboard(e.composedPath()[0].id);
+
+      }
 
   });
 
   county.addEventListener("touchend", function (e) {
 
-//update dashboard
-updateDashboard(e.path[0].id)
+    if (e.path) {
+      console.log("Supports `path`");
+      updateDashboard(e.path[0].id);
+    }
+    // browser compatibility
+      if (e.composedPath) {
+        console.log("Supports `composedPath`");
+        updateDashboard(e.composedPath()[0].id);
+
+      }
 
   });
 });
@@ -285,36 +310,36 @@ function changeData(target) {
 
 
         // change the chart data
-        document.getElementById(colors[0]).style.height = (countyData[0].Asian.Min.toString() * 8) + "%";        
+        document.getElementById(colors[0]).style.height = (countyData[0].Asian.Min.toString() * 8) + .75 + "%";        
         document.getElementById("barNumber" + colors[0] + 'Text').innerText = countyData[0].Asian.Min;
 
         
         // change the chart data
-        document.getElementById(colors[1]).style.height  = (countyData[0].Asian.Max.toString() * 8) + "%";
+        document.getElementById(colors[1]).style.height  = (countyData[0].Asian.Max.toString() * 8) + .75 + "%";
         document.getElementById("barNumber" + colors[1] + 'Text').innerText = countyData[0].Asian.Max;
         
         // change the chart data
-        document.getElementById(colors[2]).style.height = (countyData[0].Black.Min.toString() * 8) + "%";
+        document.getElementById(colors[2]).style.height = (countyData[0].Black.Min.toString() * 8) + .75 + "%";
         document.getElementById("barNumber" + colors[2] + 'Text').innerText = countyData[0].Black.Min;
 
         // change the chart data
-        document.getElementById(colors[3]).style.height = (countyData[0].Black.Max.toString() * 8) + "%";
+        document.getElementById(colors[3]).style.height = (countyData[0].Black.Max.toString() * 8) + .75 + "%";
         document.getElementById("barNumber" + colors[3] + 'Text').innerText = countyData[0].Black.Max;
 
         // change the chart data
-        document.getElementById(colors[4]).style.height = (countyData[0].Other.Min.toString() * 8) + "%";
+        document.getElementById(colors[4]).style.height = (countyData[0].Other.Min.toString() * 8) + .75 + "%";
         document.getElementById("barNumber" + colors[4] + 'Text').innerText = countyData[0].Other.Min;
         
         // change the chart data
-        document.getElementById(colors[5]).style.height = (countyData[0].Other.Max.toString() * 8) + "%";
+        document.getElementById(colors[5]).style.height = (countyData[0].Other.Max.toString() * 8) + .75 + "%";
         document.getElementById("barNumber" + colors[5] + 'Text').innerText = countyData[0].Other.Max;
         
         // change the chart data
-        document.getElementById(colors[6]).style.height = (countyData[0].White.Min.toString() * 8) + "%";
+        document.getElementById(colors[6]).style.height = (countyData[0].White.Min.toString() * 8) + .75 + "%";
         document.getElementById("barNumber" + colors[6] + 'Text').innerText = countyData[0].White.Min;
         
         // change the chart data
-        document.getElementById(colors[7]).style.height = (countyData[0].White.Max.toString() * 8) + "%";
+        document.getElementById(colors[7]).style.height = (countyData[0].White.Max.toString() * 8) + .75 + "%";
         document.getElementById("barNumber" + colors[7] + 'Text').innerText = countyData[0].White.Max;
 
 

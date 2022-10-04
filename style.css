@@ -36,6 +36,15 @@ button:active {
   overflow: hidden;
 }
 
+#mapOfNC {
+  display : block; 
+  width: 500;
+  position: relative;
+  left : 50;
+  top : 200;
+  transform: scale(1,1);
+}
+
 #data {
   display: flex;
   height: 600;
