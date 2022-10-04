@@ -21,12 +21,17 @@ button:active {
   top: 1px;
 }
 
+#dashboard{
+  margin-bottom: 25px;
+}
+
 #dataExplanation {
   padding-top: 20px;
   padding-right: 0px;
+  padding-left: 25px;
 }
 
-#dataViz {
+#chart {
     background-color:#white; 
     height: 380px;
 
