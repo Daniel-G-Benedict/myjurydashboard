@@ -185,7 +185,6 @@ document.addEventListener(
       //map.setAttribute('style', 'left : ' + leftValue.toString() + "px");
       //map.setAttribute('style', 'top : '+ topValue.toString() + "px");
       
-      
       map.style.setProperty('left', (leftValue.toString() + "px"));
       map.style.setProperty('top', (topValue.toString() + "px"));
 
@@ -311,37 +310,41 @@ function changeData(target) {
 
 
       // change the chart data
-        console.log(document.getElementById(colors[0]).style.height);
-        document.getElementById(colors[0]).style.setProperty('height', (((countyData[0].Asian.Min * 8)) + .75) + "%");
-        console.log(document.getElementById(colors[0]).style.height);
+        console.log(parseInt(getComputedStyle(document.getElementById(colors[0]).parentElement).getPropertyValue('height')));
+        
+        var contHeight = .7 * parseInt(getComputedStyle(document.getElementById(colors[0]).parentElement).getPropertyValue('height'));
+        var maxHeight = contHeight * .1;
+
+        // change the chart data
+        document.getElementById(colors[0]).style.height = (countyData[0].Asian.Min * maxHeight) + .75 + "px";
         document.getElementById("barNumber" + colors[0] + 'Text').innerText = countyData[0].Asian.Min;
 
         // change the chart data
-        document.getElementById(colors[1]).style.height  = (countyData[0].Asian.Max.toString() * 8) + .75 + "%";
+        document.getElementById(colors[1]).style.height  = (countyData[0].Asian.Max * maxHeight) + .75 + "px";
         document.getElementById("barNumber" + colors[1] + 'Text').innerText = countyData[0].Asian.Max;
         
         // change the chart data
-        document.getElementById(colors[2]).style.height = (countyData[0].Black.Min.toString() * 8) + .75 + "%";
+        document.getElementById(colors[2]).style.height = (countyData[0].Black.Min * maxHeight) + .75 + "px";
         document.getElementById("barNumber" + colors[2] + 'Text').innerText = countyData[0].Black.Min;
 
         // change the chart data
-        document.getElementById(colors[3]).style.height = (countyData[0].Black.Max.toString() * 8) + .75 + "%";
+        document.getElementById(colors[3]).style.height = (countyData[0].Black.Max * maxHeight) + .75 + "px";
         document.getElementById("barNumber" + colors[3] + 'Text').innerText = countyData[0].Black.Max;
 
         // change the chart data
-        document.getElementById(colors[4]).style.height = (countyData[0].Other.Min.toString() * 8) + .75 + "%";
+        document.getElementById(colors[4]).style.height = (countyData[0].Other.Min * maxHeight) + .75 + "px";
         document.getElementById("barNumber" + colors[4] + 'Text').innerText = countyData[0].Other.Min;
         
         // change the chart data
-        document.getElementById(colors[5]).style.height = (countyData[0].Other.Max.toString() * 8) + .75 + "%";
+        document.getElementById(colors[5]).style.height = (countyData[0].Other.Max * maxHeight) + .75 + "px";
         document.getElementById("barNumber" + colors[5] + 'Text').innerText = countyData[0].Other.Max;
         
         // change the chart data
-        document.getElementById(colors[6]).style.height = (countyData[0].White.Min.toString() * 8) + .75 + "%";
+        document.getElementById(colors[6]).style.height = (countyData[0].White.Min * maxHeight) + .75 + "px";
         document.getElementById("barNumber" + colors[6] + 'Text').innerText = countyData[0].White.Min;
         
         // change the chart data
-        document.getElementById(colors[7]).style.height = (countyData[0].White.Max.toString() * 8) + .75 + "%";
+        document.getElementById(colors[7]).style.height = (countyData[0].White.Max * maxHeight) + .75 + "px";
         document.getElementById("barNumber" + colors[7] + 'Text').innerText = countyData[0].White.Max;
 
 
@@ -423,9 +426,8 @@ for (var i = 0; i < chartjson.data.length; i++) {
   var bar = document.createElement('div');
   bar.setAttribute('class', colors[i]);
   bar.setAttribute('id',colors[i]);
-  bar.style.setProperty('height', '10%');
-  bar.style.setProperty('transition', 'height .3s');
-  bar.style.setProperty('width', '30px');
+  
+  bar.setAttribute('style', "height : 10px; width : 30px; transition : height .3s;");
   
   // create the bar text label
   var barText = document.createElement('div');
