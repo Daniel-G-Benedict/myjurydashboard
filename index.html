@@ -8,138 +8,131 @@
 
         <div id="dashboard">
             <div id ="map">
-                    <mapOverlay style="position : relative; top : 90%; z-index: 1;">
-                        <countyDropdown style="position:relative; bottom : 85%; padding-left: auto; padding-right: auto;">
-                            <label>
-                                Select a county
-                            </label>
-                            <br/>
-                            <select id="countyDropdown"
-                                    value="Alamance"
-                                    style="width:150px;">Select a county
-                                    <option value="Alamance">Alamance</option>
-                                    <option value="Alexander">Alexander</option>
-                                    <option value="Alleghany">Alleghany</option>
-                                    <option value="Anson">Anson</option>
-                                    <option value="Ashe">Ashe</option>
-                                    <option value="Avery">Avery</option>
-                                    <option value="Beaufort">Beaufort</option>
-                                    <option value="Bertie">Bertie</option>
-                                    <option value="Bladen">Bladen</option>
-                                    <option value="Brunswick">Brunswick</option>
-                                    <option value="Buncombe">Buncombe</option>
-                                    <option value="Burke">Burke</option>
-                                    <option value="Cabarrus">Cabarrus</option>
-                                    <option value="Caldwell">Caldwell</option>
-                                    <option value="Camden">Camden</option>
-                                    <option value="Carteret">Carteret</option>
-                                    <option value="Caswell">Caswell</option>
-                                    <option value="Catawba">Catawba</option>
-                                    <option value="Chatham">Chatham</option>
-                                    <option value="Cherokee">Cherokee</option>
-                                    <option value="Chowan">Chowan</option>
-                                    <option value="Clay">Clay</option>
-                                    <option value="Cleveland">Cleveland</option>
-                                    <option value="Columbus">Columbus</option>
-                                    <option value="Craven">Craven</option>
-                                    <option value="Cumberland">Cumberland</option>
-                                    <option value="Currituck">Currituck</option>
-                                    <option value="Dare">Dare</option>
-                                    <option value="Davidson">Davidson</option>
-                                    <option value="Davie">Davie</option>
-                                    <option value="Duplin">Duplin</option>
-                                    <option value="Durham">Durham</option>
-                                    <option value="Edgecombe">Edgecombe</option>
-                                    <option value="Forsyth">Forsyth</option>
-                                    <option value="Franklin">Franklin</option>
-                                    <option value="Gaston">Gaston</option>
-                                    <option value="Gates">Gates</option>
-                                    <option value="Graham">Graham</option>
-                                    <option value="Granville">Granville</option>
-                                    <option value="Greene">Greene</option>
-                                    <option value="Guilford">Guilford</option>
-                                    <option value="Halifax">Halifax</option>
-                                    <option value="Harnett">Harnett</option>
-                                    <option value="Haywood">Haywood</option>
-                                    <option value="Henderson">Henderson</option>
-                                    <option value="Hertford">Hertford</option>
-                                    <option value="Hoke">Hoke</option>
-                                    <option value="Hyde">Hyde</option>
-                                    <option value="Iredell">Iredell</option>
-                                    <option value="Jackson">Jackson</option>
-                                    <option value="Johnston">Johnston</option>
-                                    <option value="Jones">Jones</option>
-                                    <option value="Lee">Lee</option>
-                                    <option value="Lenoir">Lenoir</option>
-                                    <option value="Lincoln">Lincoln</option>
-                                    <option value="McDowell">McDowell</option>
-                                    <option value="Macon">Macon</option>
-                                    <option value="Madison">Madison</option>
-                                    <option value="Martin">Martin</option>
-                                    <option value="Mecklenburg">Mecklenburg</option>
-                                    <option value="Mitchell">Mitchell</option>
-                                    <option value="Montgomery">Montgomery</option>
-                                    <option value="Moore">Moore</option>
-                                    <option value="Nash">Nash</option>
-                                    <option value="New Hanover">New Hanover</option>
-                                    <option value="Northampton">Northampton</option>
-                                    <option value="Onslow">Onslow</option>
-                                    <option value="Orange">Orange</option>
-                                    <option value="Pamlico">Pamlico</option>
-                                    <option value="Pasquotank">Pasquotank</option>
-                                    <option value="Pender">Pender</option>
-                                    <option value="Perquimans">Perquimans</option>
-                                    <option value="Person">Person</option>
-                                    <option value="Pitt">Pitt</option>
-                                    <option value="Polk">Polk</option>
-                                    <option value="Randolph">Randolph</option>
-                                    <option value="Richmond">Richmond</option>
-                                    <option value="Robeson">Robeson</option>
-                                    <option value="Rockingham">Rockingham</option>
-                                    <option value="Rowan">Rowan</option>
-                                    <option value="Rutherford">Rutherford</option>
-                                    <option value="Sampson">Sampson</option>
-                                    <option value="Scotland">Scotland</option>
-                                    <option value="Stanly">Stanly</option>
-                                    <option value="Stokes">Stokes</option>
-                                    <option value="Surry">Surry</option>
-                                    <option value="Swain">Swain</option>
-                                    <option value="Transylvania">Transylvania</option>
-                                    <option value="Tyrrell">Tyrrell</option>
-                                    <option value="Union">Union</option>
-                                    <option value="Vance">Vance</option>
-                                    <option value="Wake">Wake</option>
-                                    <option value="Warren">Warren</option>
-                                    <option value="Washington">Washington</option>
-                                    <option value="Watauga">Watauga</option>
-                                    <option value="Wayne">Wayne</option>
-                                    <option value="Wilkes">Wilkes</option>
-                                    <option value="Wilson">Wilson</option>
-                                    <option value="Yadkin">Yadkin</option>
-                                    <option value="Yancey">Yancey</option>
-                            </select>
-                        </countyDropdown>
-                        <buttonGroup>
+                    <div id="mapOverlay">
+                              <countyDropdown>
+                                  <label>
+                                      Select a county
+                                  </label>
+                                  <br/>
+                                  <select id="countyDropdown"
+                                          value="Alamance"
+                                          style="width:150px;">Select a county
+                                          <option value="Alamance">Alamance</option>
+                                          <option value="Alexander">Alexander</option>
+                                          <option value="Alleghany">Alleghany</option>
+                                          <option value="Anson">Anson</option>
+                                          <option value="Ashe">Ashe</option>
+                                          <option value="Avery">Avery</option>
+                                          <option value="Beaufort">Beaufort</option>
+                                          <option value="Bertie">Bertie</option>
+                                          <option value="Bladen">Bladen</option>
+                                          <option value="Brunswick">Brunswick</option>
+                                          <option value="Buncombe">Buncombe</option>
+                                          <option value="Burke">Burke</option>
+                                          <option value="Cabarrus">Cabarrus</option>
+                                          <option value="Caldwell">Caldwell</option>
+                                          <option value="Camden">Camden</option>
+                                          <option value="Carteret">Carteret</option>
+                                          <option value="Caswell">Caswell</option>
+                                          <option value="Catawba">Catawba</option>
+                                          <option value="Chatham">Chatham</option>
+                                          <option value="Cherokee">Cherokee</option>
+                                          <option value="Chowan">Chowan</option>
+                                          <option value="Clay">Clay</option>
+                                          <option value="Cleveland">Cleveland</option>
+                                          <option value="Columbus">Columbus</option>
+                                          <option value="Craven">Craven</option>
+                                          <option value="Cumberland">Cumberland</option>
+                                          <option value="Currituck">Currituck</option>
+                                          <option value="Dare">Dare</option>
+                                          <option value="Davidson">Davidson</option>
+                                          <option value="Davie">Davie</option>
+                                          <option value="Duplin">Duplin</option>
+                                          <option value="Durham">Durham</option>
+                                          <option value="Edgecombe">Edgecombe</option>
+                                          <option value="Forsyth">Forsyth</option>
+                                          <option value="Franklin">Franklin</option>
+                                          <option value="Gaston">Gaston</option>
+                                          <option value="Gates">Gates</option>
+                                          <option value="Graham">Graham</option>
+                                          <option value="Granville">Granville</option>
+                                          <option value="Greene">Greene</option>
+                                          <option value="Guilford">Guilford</option>
+                                          <option value="Halifax">Halifax</option>
+                                          <option value="Harnett">Harnett</option>
+                                          <option value="Haywood">Haywood</option>
+                                          <option value="Henderson">Henderson</option>
+                                          <option value="Hertford">Hertford</option>
+                                          <option value="Hoke">Hoke</option>
+                                          <option value="Hyde">Hyde</option>
+                                          <option value="Iredell">Iredell</option>
+                                          <option value="Jackson">Jackson</option>
+                                          <option value="Johnston">Johnston</option>
+                                          <option value="Jones">Jones</option>
+                                          <option value="Lee">Lee</option>
+                                          <option value="Lenoir">Lenoir</option>
+                                          <option value="Lincoln">Lincoln</option>
+                                          <option value="McDowell">McDowell</option>
+                                          <option value="Macon">Macon</option>
+                                          <option value="Madison">Madison</option>
+                                          <option value="Martin">Martin</option>
+                                          <option value="Mecklenburg">Mecklenburg</option>
+                                          <option value="Mitchell">Mitchell</option>
+                                          <option value="Montgomery">Montgomery</option>
+                                          <option value="Moore">Moore</option>
+                                          <option value="Nash">Nash</option>
+                                          <option value="New Hanover">New Hanover</option>
+                                          <option value="Northampton">Northampton</option>
+                                          <option value="Onslow">Onslow</option>
+                                          <option value="Orange">Orange</option>
+                                          <option value="Pamlico">Pamlico</option>
+                                          <option value="Pasquotank">Pasquotank</option>
+                                          <option value="Pender">Pender</option>
+                                          <option value="Perquimans">Perquimans</option>
+                                          <option value="Person">Person</option>
+                                          <option value="Pitt">Pitt</option>
+                                          <option value="Polk">Polk</option>
+                                          <option value="Randolph">Randolph</option>
+                                          <option value="Richmond">Richmond</option>
+                                          <option value="Robeson">Robeson</option>
+                                          <option value="Rockingham">Rockingham</option>
+                                          <option value="Rowan">Rowan</option>
+                                          <option value="Rutherford">Rutherford</option>
+                                          <option value="Sampson">Sampson</option>
+                                          <option value="Scotland">Scotland</option>
+                                          <option value="Stanly">Stanly</option>
+                                          <option value="Stokes">Stokes</option>
+                                          <option value="Surry">Surry</option>
+                                          <option value="Swain">Swain</option>
+                                          <option value="Transylvania">Transylvania</option>
+                                          <option value="Tyrrell">Tyrrell</option>
+                                          <option value="Union">Union</option>
+                                          <option value="Vance">Vance</option>
+                                          <option value="Wake">Wake</option>
+                                          <option value="Warren">Warren</option>
+                                          <option value="Washington">Washington</option>
+                                          <option value="Watauga">Watauga</option>
+                                          <option value="Wayne">Wayne</option>
+                                          <option value="Wilkes">Wilkes</option>
+                                          <option value="Wilson">Wilson</option>
+                                          <option value="Yadkin">Yadkin</option>
+                                          <option value="Yancey">Yancey</option>
+                                  </select>
+                              </countyDropdown>
+                        <div id="buttonGroup">
                             <button id="zoomOut">
                                 -
                             </button>
                             <button id="zoomIn">
                                 +
                             </button>
-                        </buttonGroup>
-                    </mapOverlay>    
+                        </div>
+                    </div>    
                 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
                     <!-- Created with Inkscape (http://www.inkscape.org/) -->
                     <svg
                        viewBox="-43999 -10822 80608 30557"
                        id="mapOfNC"
-                       style="
-                                display : block; 
-                                width: 500;
-                                position: relative;
-                                left : 50;
-                                top : 200;
-                                transform: scale(1,1)"
                                 >
                       <metadata
                          id="metadata3893">
@@ -1107,7 +1100,7 @@
                             between
                             <b id="minOther"></b> 
                               and
-                            <b id="maxOther"></b> jurors who identify as Black, and between
+                            <b id="maxOther"></b> jurors who identify as "Other", and between
                             <b id="minWhite"></b> 
                             and 
                             <b id="maxWhite"></b> jurors who identify as White.

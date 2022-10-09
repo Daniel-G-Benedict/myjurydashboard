@@ -29,20 +29,42 @@ button:active {
   align-items: stretch;
 }
 
+#mapOverlay {
+  margin: auto;
+  text-align: center;
+  position: relative;
+
+  transform: translate(1,0);
+  transform-origin: center;
+
+  z-index: 1;
+}
+
+#buttonGroup {
+ position: relative;
+ top: 450px;
+}
+
 #map {
   background-color: white; 
+  
   height: 600px; 
   flex: 2 0 300px; 
+
   overflow: hidden;
 }
 
 #mapOfNC {
   display : block; 
+  
   width: 500;
   position: relative;
-  left : 50;
-  top : 200;
+
   transform: scale(1,1);
+  transform-origin: 50%;
+
+  top : 115px;
+
 }
 
 #data {
@@ -54,7 +76,7 @@ button:active {
 }
 
 #chart {
-  background-color:#white; 
+  background-color: white; 
 
   height : auto;
 

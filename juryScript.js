@@ -12,21 +12,18 @@ var countyDropdown = document.getElementById("countyDropdown");
 // ZOOM OUT
 document.getElementById("zoomOut").onclick = function () {
   //console.log("zooming out");
-  var map = document.getElementById("mapOfNC");
-  //console.log(map.style.transform);
-  var m = map.style.transform;
+  var m = getComputedStyle(map).getPropertyValue('transform');
   var mt = m.substring(m.indexOf("(") + 1, m.indexOf(")")).split(",");
   // or else: var mt = m.substring(7, m.length - 1).split(',');
-  var nextScale = mt[0] * 0.9;
+  var nextScale = mt[0] * 0.8;
   //console.log(nextScale);
   map.style.transition = "transform .4s";
-  // setting a "zoom in" limit
+  // setting a "zoom out" limit
   if (nextScale < 1) {
     console.log("Minimum size reached");
     return
   }
   else {
-
     map.style.transform =
     "scale(" + nextScale.toString() + "," + nextScale.toString() + ")";
   }
@@ -35,9 +32,8 @@ document.getElementById("zoomOut").onclick = function () {
 // ZOOM IN
 document.getElementById("zoomIn").onclick = function () {
   //console.log("zooming in");
-  var map = document.getElementById("mapOfNC");
-  //console.log(map.style.transform);
-  var m = map.style.transform;
+  console.log(map.style.scale);
+  var m = getComputedStyle(map).getPropertyValue('transform');
   var mt = m.substring(m.indexOf("(") + 1, m.indexOf(")")).split(",");
   // or else: var mt = m.substring(7, m.length - 1).split(',');
   var nextScale = mt[0] * 1.2;
@@ -52,6 +48,7 @@ if (nextScale > 9) {
 else {
   map.style.transform =
     "scale(" + nextScale.toString() + "," + nextScale.toString() + ")";
+
 }
 };
 
@@ -70,9 +67,11 @@ map.addEventListener(
 
     map.style.transition = "left 0s";
 
-    var newMapX = parseInt(map.style.left) - e.clientX;
-    console.log(map.getAttribute('style').left);
-    var newMapY = parseInt(map.style.top) - e.clientY;
+    getComputedStyle(map).getPropertyValue('left')
+    var newMapX = parseInt(getComputedStyle(map).getPropertyValue('left')) - e.clientX;
+    console.log(newMapX);
+    console.log(parseInt(getComputedStyle(map).getPropertyValue('left')));
+    var newMapY =  parseInt(getComputedStyle(map).getPropertyValue('top')) - e.clientY;
 
     offset = [
       newMapX, newMapY
@@ -90,9 +89,7 @@ document.addEventListener(
     console.log("stopped moving map");
     isDown = false;
 
-    var map = document.getElementById("mapOfNC");
-
-    var m = map.style.transform;
+    var m = getComputedStyle(map).getPropertyValue('transform');
     var mt = m.substring(m.indexOf("(") + 1, m.indexOf(")")).split(",");
     // or else: var mt = m.substring(7, m.length - 1).split(',');
     var scale = mt[0];
@@ -154,11 +151,11 @@ document.addEventListener(
 
     if (mapTop < limitTop) {
       var adjMapY = (mapTop - distToLimitTop);
-      map.style.top = adjMapY + "px";
+      map.style.setProperty("top", (adjMapY + "px"));
     }
     if (mapTop > limitBottom) {
       var adjMapY = (mapTop + distToLimitBottom);
-      map.style.top = adjMapY + "px";
+      map.style.setProperty('top', (adjMapY + "px"));
     }
 
     var distToLimitTop
@@ -188,8 +185,11 @@ document.addEventListener(
       //map.setAttribute('style', 'left : ' + leftValue.toString() + "px");
       //map.setAttribute('style', 'top : '+ topValue.toString() + "px");
       
-      map.style.left = leftValue.toString() + "px";
-      map.style.top  = topValue.toString() + "px";
+      
+      map.style.setProperty('left', (leftValue.toString() + "px"));
+      map.style.setProperty('top', (topValue.toString() + "px"));
+
+
   }
   },
   true
@@ -240,6 +240,7 @@ counties.forEach((county) => {
 
 function updateDashboard(target) {
       
+      //console.log(target)
       //update the dropdown to the selected county
       countyDropdown.value = target;
       console.log("Clicked " + target + " county");
@@ -250,7 +251,7 @@ function updateDashboard(target) {
       // change the map
       changeMap(target);
   
-      console.log(target);
+      //console.log(target);
 }
 
 function changeMap(target) {
@@ -294,26 +295,27 @@ function changeData(target) {
       // change the paragraph to show the minimum number of individuals of Asian descent on the jury
         document.getElementById("minAsian").innerText = countyData[0].Asian.Min;
       // change the paragraph to show the minimum number of individuals of Black descent on the jury
-        document.getElementById("minBlack").innerText = countyData[0].Black.Min;
-      // change the paragraph to show the minimum number of individuals of "other" descent on the jury
-        document.getElementById("minOther").innerText = countyData[0].Other.Min;
-      // change the paragraph to show the minimum number of individuals of White descent on the jury
-        document.getElementById("minWhite").innerText = countyData[0].White.Min;
-      // change the paragraph to show the max number of individuals of Asian descent on the jury
       document.getElementById("maxAsian").innerText = countyData[0].Asian.Max;
-      // change the paragraph max number of individuals of Black descent on the jury
-      document.getElementById("maxBlack").innerText = countyData[0].Black.Max;
       // change the paragraph max number of individuals of Other descent on the jury
-      document.getElementById("maxOther").innerText = countyData[0].White.Min;
+        document.getElementById("minBlack").innerText = countyData[0].Black.Min;
+        // change the paragraph max number of individuals of Black descent on the jury
+        document.getElementById("maxBlack").innerText = countyData[0].Black.Max;
+        // change the paragraph to show the minimum number of individuals of "other" descent on the jury
+        document.getElementById("minOther").innerText = countyData[0].Other.Min;
+        // change the paragraph to show the max number of individuals of Other descent on the jury
+        document.getElementById("maxOther").innerText = countyData[0].Other.Max;
+        // change the paragraph to show the minimum number of individuals of White descent on the jury
+          document.getElementById("minWhite").innerText = countyData[0].White.Min;
       // change the paragraph max number of individuals of White descent on the jury
       document.getElementById("maxWhite").innerText = countyData[0].White.Max;
 
 
-        // change the chart data
-        document.getElementById(colors[0]).style.height = (countyData[0].Asian.Min.toString() * 8) + .75 + "%";        
+      // change the chart data
+        console.log(document.getElementById(colors[0]).style.height);
+        document.getElementById(colors[0]).style.setProperty('height', (((countyData[0].Asian.Min * 8)) + .75) + "%");
+        console.log(document.getElementById(colors[0]).style.height);
         document.getElementById("barNumber" + colors[0] + 'Text').innerText = countyData[0].Asian.Min;
 
-        
         // change the chart data
         document.getElementById(colors[1]).style.height  = (countyData[0].Asian.Max.toString() * 8) + .75 + "%";
         document.getElementById("barNumber" + colors[1] + 'Text').innerText = countyData[0].Asian.Max;
@@ -421,15 +423,16 @@ for (var i = 0; i < chartjson.data.length; i++) {
   var bar = document.createElement('div');
   bar.setAttribute('class', colors[i]);
   bar.setAttribute('id',colors[i]);
-  bar.style.transition = 'height .3s';
-  bar.style.height = chartjson.data[i][chartjson.ykey] + prefix;
-  bar.style.width = '30px';
+  bar.style.setProperty('height', '10%');
+  bar.style.setProperty('transition', 'height .3s');
+  bar.style.setProperty('width', '30px');
   
   // create the bar text label
   var barText = document.createElement('div');
   barText.setAttribute('id', 'barNumber' + colors[i] + 'Text')
   barText.innerText = chartjson.data[i][chartjson.ykey];
 
+  // inject the elements into the chart
   bardata.appendChild(barText);
   bardata.appendChild(bar);
   barrow.appendChild(bardata);
@@ -449,6 +452,7 @@ for (var i = 0; i < chartjson.data.length; i++) {
   barname.setAttribute('class', colors[i] + ' xaxisname');
   var bartext = document.createElement('span');
   bartext.innerText = chartjson.data[i][chartjson.xkey];
+  
   legbox.appendChild(barname);
   legbox.appendChild(bartext);
   legend.appendChild(legbox);
@@ -565,3 +569,12 @@ var  censusData = [
 
 changeData("Alamance");
 changeMap("Alamance");
+
+/*
+var asianMin = document.getElementById(colors[0]);
+console.log(asianMin.style.height)
+asianMin.style.height = (8) + .75 + "%";        
+console.log(document.getElementById(colors[2]).attributes);
+console.log(document.getElementById(colors[2]).attributes.style);
+console.log(document.getElementById("mapOfNC").attributes.style);
+*/
