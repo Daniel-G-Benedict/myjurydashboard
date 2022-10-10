@@ -205,7 +205,17 @@ countyDropdown.onchange = function() {
 // event for clicking on a county
 counties.forEach((county) => {
 
+  var tooltip = document.createElement('div')
+  tooltip.setAttribute('class', 'tooltiptext');
+
+  tooltip.innerText = county.id + " County";
+
+  county.appendChild(tooltip);
+
+  console.log(county)
+
   county.addEventListener("click", function (e) {
+
 
     // browser compatibility
     if (e.path) {
