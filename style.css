@@ -70,8 +70,9 @@ button:active {
 #data {
   display: flex;
   height: 600;
-  flex: 2 0 245px;
+  flex: 2 0 50%;
   flex-direction: column;
+  padding-left: 25px;
 
 }
 
@@ -81,7 +82,6 @@ button:active {
   height : auto;
 
   padding-top: 20px;
-  padding-left: 25px;
   padding-right: 0px;
 
   margin-bottom:25px;
@@ -90,9 +90,15 @@ button:active {
 #dataExplanation {
   padding-top: 20px;
   padding-right: 0px;
-  padding-left: 25px;
 
   height : 300px;
+}
+
+/* Responsive layout - makes a one column layout (100%) instead of a two-column layout (50%) */
+@media (max-width: 400px) {
+  #data {
+    padding-left: 0px;
+  }
 }
 
 h2 {
